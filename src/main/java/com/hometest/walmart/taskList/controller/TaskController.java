@@ -88,21 +88,15 @@ public class TaskController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("user/createNote")
+    @PostMapping("user/notes/createNote")
     public ResponseEntity createNotes(@RequestParam(value = "userId", required = true) final String userId, @PathVariable("feedback") final String notes) {
         userDataAccessor.createNotes(userId, notes);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PatchMapping("notes/update/{userId}")
-    public ResponseEntity updateNotes(@RequestBody String body, @PathVariable("userId") final String userId) {
-        String updatedNotes = userDataAccessor.updateNotes(userId, body);
-        return new ResponseEntity(updatedNotes, HttpStatus.OK);
-    }
-
-    @GetMapping("/notes/{notesId}")
-    public ResponseEntity getNotes(@PathVariable("notesId") String notesId) {
-        List<String> notes = userDataAccessor.getNotes(notesId);
-        return new ResponseEntity(HttpStatus.OK);
+    @GetMapping("user/notes")
+    public ResponseEntity<Object> getNotes(@RequestParam(value ="userId", required = true) String userId) {
+        List<String> notes = userDataAccessor.getNotes(userId);
+        return new ResponseEntity(notes, HttpStatus.OK);
     }
 }
