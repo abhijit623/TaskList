@@ -64,7 +64,7 @@ public class UserDataAccessor {
         notes.add(note);
     }
 
-    public List<String> viewNotes(String userId) {
+    public List<String> getNotes(String userId) {
 
         User user = getUserData(userId);
         return user.getNotes();
